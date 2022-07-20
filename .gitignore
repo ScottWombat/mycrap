@@ -2,3 +2,4 @@ mongodb/data-directory
 redis/redisinsight
 spark-cluster/apps/MTA_2014_08_01.csv
 spark-cluster/apps/postgresql-42.2.22.jar
+kafka/data
