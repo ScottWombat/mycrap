@@ -1,0 +1,2 @@
+It requires to change ownship
+>sudo chown -R 1001 redisinsight 
