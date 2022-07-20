@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mongo-db:
+    #network_mode: host
+    image: mongo:latest
+    container_name: mongo-db
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=admin1
+        - MONGO_INITDB_ROOT_PASSWORD=pass1
+    ports:
+      - "27017:27017"
+    volumes:  
+      - ./data-directory/:/data/db/
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+    command: mongod
+    networks:
+      - mnet
+  mongo-express:
+        image: mongo-express:latest
+        container_name: mongo-express
+        environment:
+          ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+          ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+          ME_CONFIG_BASICAUTH_USERNAME: revit
+          ME_CONFIG_BASICAUTH_PASSWORD: rev123
+          ME_CONFIG_MONGODB_SERVER: mongo-db
+          #ME_CONFIG_MONGODB_URL: mongodb://admin1:pass1@mongo:27017/
+          #ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+          ME_CONFIG_MONGODB_AUTH_USERNAME: admin1
+          ME_CONFIG_MONGODB_AUTH_PASSWORD: pass1
+          ME_CONFIG_MONGODB_ADMINUSERNAME: admin1
+          ME_CONFIG_MONGODB_ADMINPASSWORD: pass1
+        networks:
+          - mnet
+        ports:
+            - 8081:8081
+        depends_on:
+            - mongo-db
+        restart: unless-stopped
+networks:
+    mnet:
+        driver: bridge

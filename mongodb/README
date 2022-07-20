@@ -1,0 +1,13 @@
+> docker exec -it container_id/contaier_name bash
+
+For admin database
+>mongosh -u admin1 -p pass1 admin
+
+For new_db
+>mongosh -u user2 -p pass2 new_db
+
+Mongo ui
+
+http://localhost:8081
+user: revit
+password: rev123
