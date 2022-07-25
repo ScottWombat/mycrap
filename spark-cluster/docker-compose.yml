@@ -12,7 +12,7 @@ services:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_WORKLOAD=master
     depends_on:
-      - demo_database
+      - demo-database
   spark-worker-a:
     image: cluster-apache-spark:3.0.2
     ports:
